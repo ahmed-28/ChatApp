@@ -13,8 +13,14 @@ const Chat = ({location}) => {
         setRoom(room);
         
         const socket = io(API_URL);
+        socket.emit('join',{name,room});
 
         console.log(socket);
+
+        return () => {
+            socket.emit('disconnect');
+            socket.off();
+        }
 
     },[location.search]);
     
