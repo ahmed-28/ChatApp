@@ -51,6 +51,7 @@ const Chat = ({location}) => {
             <h1 className="pb-4 font-black text-2xl">Chat Room</h1>
             <div class="flex flex-col w-full max-w-lg rounded-sm">
                 <TopNav room={room}/>
+                
                 <main class="bg-green-600 flex items-center flex-grow justify-center text-white">Main</main>
                 <InputMessage message={message} setMessage={setMessage} sendMessage={sendMessage}/>
             </div>
