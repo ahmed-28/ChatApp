@@ -15,20 +15,16 @@ io.on('connection', (socket) => {
 
     socket.on('join',({name,room},callback)=>{
         const {error,user} = addUser({id:socket.id,name,room});
-
-        if(error){
-            callback(error);
-        }
+        console.log(user,error);
 
         socket.emit('message',{user:'admin',text:`${user.name}, Welcome to the room ${user.room}!`});
         socket.broadcast.to(user.room).emit('message',`${user.name} has joined now !`);
 
         socket.join(user.room)
-        callback();
         console.log(name,room);
     });
 
-    socket.on('sendMessage' , (message,callback) => {
+    socket.on('sendMessage',(message,callback) => {
         const user = getUser(socket.id);
         io.to(user.room).emit('message',{user:user.name,text:message});
         callback(); 
@@ -44,4 +40,4 @@ app.use(router);
 
 server.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
-})
+});
