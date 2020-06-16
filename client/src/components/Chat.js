@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
 import TopNav from './TopNav';
+import InputMessage from './InputMessage';
 
 let socket;
 const API_URL = "localhost:5000";
@@ -24,7 +25,7 @@ const Chat = ({location}) => {
         console.log(socket);
 
         return () => {
-            socket.emit('disconnect');
+            socket.disconnect();
             socket.off();
         }
 
@@ -46,12 +47,12 @@ const Chat = ({location}) => {
     console.log(message,messages);
     
     return (
-        <div className="h-screen w-full flex flex-col justiy-center items-center bg-green-500">
-            <h1>Chat page</h1>
-            <div class="flex flex-col bg-purple-500" style={{width:"550px",height:"550px"}}>
-                <header class="p-4 bg-red-100 text-center text-white font-bold">Header</header>
+        <div className="h-screen w-full flex flex-col justify-center items-center bg-green-500">
+            <h1 className="pb-4 font-black text-2xl">Chat Room</h1>
+            <div class="flex flex-col w-full max-w-lg rounded-sm">
+                <TopNav room={room}/>
                 <main class="bg-green-600 flex items-center flex-grow justify-center text-white">Main</main>
-                <footer class="p-4 bg-red-500 text-center text-white font-bold">Footer</footer>
+                <InputMessage message={message} setMessage={setMessage} sendMessage={sendMessage}/>
             </div>
         </div>
     );
