@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import io from 'socket.io-client';
 import TopNav from './TopNav';
 import InputMessage from './InputMessage';
+import ChatArea from './ChatArea';
 
 let socket;
 const API_URL = "localhost:5000";
@@ -51,8 +52,7 @@ const Chat = ({location}) => {
             <h1 className="pb-4 font-black text-2xl">Chat Room</h1>
             <div class="flex flex-col w-full max-w-lg rounded-sm">
                 <TopNav room={room}/>
-                
-                <main class="bg-green-600 flex items-center flex-grow justify-center text-white">Main</main>
+                <ChatArea messages = {messages} name={name} />
                 <InputMessage message={message} setMessage={setMessage} sendMessage={sendMessage}/>
             </div>
         </div>
